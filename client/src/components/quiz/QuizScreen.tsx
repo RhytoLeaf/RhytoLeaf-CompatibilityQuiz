@@ -85,13 +85,13 @@ export function QuizScreen({
                   } ${showExplanation ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'}`}
                 >
                   <div className="flex items-center">
-                    <div className={`w-6 h-6 border-2 rounded-full mr-4 transition-colors ${
+                    <div className={`w-6 h-6 border-2 rounded-full mr-4 transition-colors flex items-center justify-center ${
                       selectedOption === index
                         ? 'border-primary bg-primary'
                         : 'border-muted-foreground group-hover:border-primary'
                     }`}>
                       {selectedOption === index && (
-                        <div className="w-2 h-2 bg-white rounded-full mx-auto mt-1" />
+                        <div className="w-3 h-3 bg-white rounded-full" />
                       )}
                     </div>
                     <span className={`font-medium transition-colors ${
