@@ -54,7 +54,11 @@ export function QuizScreen({
           <CardContent className="p-8 md:p-12">
             <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
-                <Badge variant="default" className="bg-primary text-white px-4 py-2">
+                <Badge 
+                  variant="default" 
+                  className="px-4 py-2"
+                  style={{ backgroundColor: '#F2F2F2', color: '#00CE7C', border: '2px solid #00CE7C' }}
+                >
                   {currentQuestion.category}
                 </Badge>
                 <span className="text-muted-foreground text-sm font-medium">
