@@ -120,16 +120,9 @@ export function ResultsScreen({ results, onShareResults, onRetakeQuiz }: Results
         {/* Footer */}
         <footer className="bg-white dark:bg-card border-t border-border mt-16 rounded-t-lg">
           <div className="px-4 py-8 text-center">
-            <p className="text-muted-foreground mb-4">
-              Based on the study of relationship patterns and the seven silent signs of fundamental incompatibility.
+            <p className="text-muted-foreground text-sm">
+              © 2025 RhytoLeaf inc.
             </p>
-            <div className="flex justify-center space-x-6 text-sm text-muted-foreground">
-              <span>© 2024 Relationship Insights</span>
-              <span>•</span>
-              <span>Educational Content</span>
-              <span>•</span>
-              <span>Privacy Focused</span>
-            </div>
           </div>
         </footer>
       </div>
