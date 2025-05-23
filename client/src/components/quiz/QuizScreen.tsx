@@ -77,12 +77,12 @@ export function QuizScreen({
                 <button
                   key={index}
                   onClick={() => onSelectOption(index)}
-                  disabled={showExplanation}
+                  disabled={false}
                   className={`w-full text-left p-6 border-2 rounded-xl transition-all duration-300 group ${
                     selectedOption === index
                       ? 'border-primary bg-green-50 dark:bg-green-900/20'
                       : 'border-border hover:border-primary hover:bg-green-50 dark:hover:bg-green-900/20'
-                  } ${showExplanation ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'}`}
+                  } cursor-pointer`}
                 >
                   <div className="flex items-center">
                     <div className={`w-6 h-6 border-2 rounded-full mr-4 transition-colors flex items-center justify-center ${
@@ -133,7 +133,7 @@ export function QuizScreen({
               
               <Button
                 onClick={onNextQuestion}
-                disabled={selectedOption === null || showExplanation}
+                disabled={selectedOption === null}
                 className="px-6 py-3"
                 style={{ backgroundColor: '#00CE7C', color: '#FFFFFF' }}
               >
@@ -144,22 +144,7 @@ export function QuizScreen({
           </CardContent>
         </Card>
 
-        {/* Explanation Card */}
-        {showExplanation && (
-          <Card className="mt-6 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border-l-4 border-green-400 animate-fade-in-up">
-            <CardContent className="p-6">
-              <div className="flex items-start">
-                <Lightbulb className="h-6 w-6 text-green-500 mt-1 mr-4 flex-shrink-0" />
-                <div>
-                  <h4 className="text-lg font-semibold text-green-800 dark:text-green-200 mb-2">Insight</h4>
-                  <p className="text-green-700 dark:text-green-300 leading-relaxed">
-                    {currentQuestion.explanation}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+
       </div>
     </div>
   );

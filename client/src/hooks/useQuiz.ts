@@ -35,17 +35,14 @@ export const useQuiz = () => {
     };
 
     setAnswers(prev => [...prev, answer]);
-    setShowExplanation(true);
 
-    setTimeout(() => {
-      if (currentQuestionIndex < totalQuestions - 1) {
-        setCurrentQuestionIndex(prev => prev + 1);
-        setSelectedOption(null);
-        setShowExplanation(false);
-      } else {
-        setCurrentScreen('results');
-      }
-    }, 3000);
+    if (currentQuestionIndex < totalQuestions - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+      setSelectedOption(null);
+      setShowExplanation(false);
+    } else {
+      setCurrentScreen('results');
+    }
   }, [selectedOption, currentQuestion, currentQuestionIndex, totalQuestions]);
 
   const previousQuestion = useCallback(() => {
@@ -79,7 +76,7 @@ export const useQuiz = () => {
       };
     });
 
-    // Generate insights based on performance
+    // Generate insights based on performance and question explanations
     const insights: string[] = [];
     
     if (percentage >= 80) {
@@ -101,6 +98,17 @@ export const useQuiz = () => {
     if (weakCategories.length > 0) {
       insights.push(`Consider exploring these areas further: ${weakCategories.map(cat => cat.category).join(', ')}.`);
     }
+
+    // Add detailed explanations from each question
+    const questionInsights = answers.map(answer => {
+      const question = quizQuestions.find(q => q.id === answer.questionId);
+      if (question) {
+        return `${question.category}: ${question.explanation}`;
+      }
+      return '';
+    }).filter(insight => insight !== '');
+
+    insights.push(...questionInsights);
 
     return {
       totalScore,
