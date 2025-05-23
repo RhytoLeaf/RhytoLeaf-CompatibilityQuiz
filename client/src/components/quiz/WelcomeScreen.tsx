@@ -35,7 +35,7 @@ export function WelcomeScreen({ onStartQuiz }: WelcomeScreenProps) {
               </p>
             </div>
             
-            <div className="bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-950/20 dark:to-purple-950/20 rounded-xl p-6 mb-8">
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl p-6 mb-8">
               <h3 className="font-semibold text-foreground mb-3">What You'll Discover:</h3>
               <div className="grid md:grid-cols-2 gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center">
@@ -60,7 +60,7 @@ export function WelcomeScreen({ onStartQuiz }: WelcomeScreenProps) {
             <Button 
               onClick={onStartQuiz}
               size="lg"
-              className="bg-gradient-primary hover:opacity-90 text-white px-8 py-4 text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
             >
               <Play className="mr-3 h-5 w-5" />
               Start Quiz (18 Questions)

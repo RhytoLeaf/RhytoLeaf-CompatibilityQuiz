@@ -51,7 +51,7 @@ export function ResultsScreen({ results, onShareResults, onRetakeQuiz }: Results
               onClick={onShareResults}
               variant="secondary"
               size="lg"
-              className="bg-white text-primary hover:bg-gray-50 px-6 py-3 font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+              className="bg-white text-primary hover:bg-gray-50 dark:bg-gray-100 dark:text-primary px-6 py-3 font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
             >
               <Share2 className="mr-2 h-5 w-5" />
               Share Your Results
@@ -83,7 +83,7 @@ export function ResultsScreen({ results, onShareResults, onRetakeQuiz }: Results
             </div>
 
             {/* Key Insights */}
-            <Card className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 mb-8">
+            <Card className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 mb-8">
               <CardContent className="p-6">
                 <h4 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <Star className="mr-3 h-6 w-6 text-accent" />
@@ -108,7 +108,7 @@ export function ResultsScreen({ results, onShareResults, onRetakeQuiz }: Results
               <Button 
                 onClick={onRetakeQuiz}
                 size="lg"
-                className="flex-1 bg-gradient-primary hover:opacity-90 text-white px-6 py-4 font-semibold hover:shadow-lg transition-all duration-300"
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-4 font-semibold hover:shadow-lg transition-all duration-300"
               >
                 <RotateCcw className="mr-2 h-5 w-5" />
                 Retake Quiz
@@ -117,7 +117,7 @@ export function ResultsScreen({ results, onShareResults, onRetakeQuiz }: Results
                 onClick={onShareResults}
                 variant="outline"
                 size="lg"
-                className="flex-1 border-2 border-primary text-primary hover:bg-pink-50 dark:hover:bg-pink-950/20 px-6 py-4 font-semibold transition-all duration-300"
+                className="flex-1 border-2 border-primary text-primary hover:bg-green-50 dark:hover:bg-green-900/20 px-6 py-4 font-semibold transition-all duration-300"
               >
                 <Share2 className="mr-2 h-5 w-5" />
                 Share Results

@@ -73,8 +73,8 @@ export function QuizScreen({
                   disabled={showExplanation}
                   className={`w-full text-left p-6 border-2 rounded-xl transition-all duration-300 group ${
                     selectedOption === index
-                      ? 'border-primary bg-pink-50 dark:bg-pink-950/20'
-                      : 'border-border hover:border-primary hover:bg-pink-50 dark:hover:bg-pink-950/20'
+                      ? 'border-primary bg-green-50 dark:bg-green-900/20'
+                      : 'border-border hover:border-primary hover:bg-green-50 dark:hover:bg-green-900/20'
                   } ${showExplanation ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'}`}
                 >
                   <div className="flex items-center">
@@ -114,7 +114,7 @@ export function QuizScreen({
               <Button
                 onClick={onNextQuestion}
                 disabled={selectedOption === null || showExplanation}
-                className="px-6 py-3 bg-gradient-primary hover:opacity-90 text-white"
+                className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 {isLastQuestion ? 'View Results' : 'Next'}
                 <ArrowRight className="ml-2 h-4 w-4" />
