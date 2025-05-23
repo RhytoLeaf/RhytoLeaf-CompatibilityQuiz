@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --background: 247 250 252; /* #F7FAFC */
-  --foreground: 45 55 72; /* #2D3748 */
-  --muted: 226 232 240; /* #E2E8F0 */
-  --muted-foreground: 100 116 139; /* #64748B */
+  --background: 255 255 255; /* #FFFFFF */
+  --foreground: 30 30 30; /* #1E1E1E */
+  --muted: 248 250 252; /* #F8FAFC */
+  --muted-foreground: 71 85 105; /* #475569 */
   --popover: 255 255 255; /* #FFFFFF */
-  --popover-foreground: 45 55 72; /* #2D3748 */
+  --popover-foreground: 30 30 30; /* #1E1E1E */
   --card: 255 255 255; /* #FFFFFF */
-  --card-foreground: 45 55 72; /* #2D3748 */
+  --card-foreground: 30 30 30; /* #1E1E1E */
   --border: 226 232 240; /* #E2E8F0 */
-  --input: 226 232 240; /* #E2E8F0 */
+  --input: 241 245 249; /* #F1F5F9 */
   --primary: 233 30 99; /* #E91E63 */
   --primary-foreground: 255 255 255; /* #FFFFFF */
   --secondary: 142 36 170; /* #8E24AA */
@@ -68,7 +68,11 @@
   }
   
   .bg-gradient-soft {
-    background: linear-gradient(135deg, #F7FAFC, #EDE9FE, #FCE7F3);
+    background: linear-gradient(135deg, #FAFAFA, #F3F4F6, #F9FAFB);
+  }
+
+  .dark .bg-gradient-soft {
+    background: linear-gradient(135deg, #0F172A, #1E293B, #334155);
   }
   
   .text-gradient {
