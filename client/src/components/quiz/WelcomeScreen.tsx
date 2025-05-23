@@ -60,7 +60,8 @@ export function WelcomeScreen({ onStartQuiz }: WelcomeScreenProps) {
             <Button 
               onClick={onStartQuiz}
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+              className="px-8 py-4 text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+              style={{ backgroundColor: '#00CE7C', color: '#FFFFFF' }}
             >
               <Play className="mr-3 h-5 w-5" />
               Start Quiz (18 Questions)

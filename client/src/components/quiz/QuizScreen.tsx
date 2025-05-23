@@ -114,7 +114,8 @@ export function QuizScreen({
               <Button
                 onClick={onNextQuestion}
                 disabled={selectedOption === null || showExplanation}
-                className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground"
+                className="px-6 py-3"
+                style={{ backgroundColor: '#00CE7C', color: '#FFFFFF' }}
               >
                 {isLastQuestion ? 'View Results' : 'Next'}
                 <ArrowRight className="ml-2 h-4 w-4" />

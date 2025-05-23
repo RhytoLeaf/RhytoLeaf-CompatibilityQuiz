@@ -51,7 +51,8 @@ export function ResultsScreen({ results, onShareResults, onRetakeQuiz }: Results
               onClick={onShareResults}
               variant="secondary"
               size="lg"
-              className="bg-white text-primary hover:bg-gray-50 dark:bg-gray-100 dark:text-primary px-6 py-3 font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+              className="px-6 py-3 font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+              style={{ backgroundColor: '#F2F2F2', color: '#212121', border: '2px solid #00CE7C' }}
             >
               <Share2 className="mr-2 h-5 w-5" />
               Share Your Results
@@ -108,7 +109,8 @@ export function ResultsScreen({ results, onShareResults, onRetakeQuiz }: Results
               <Button 
                 onClick={onRetakeQuiz}
                 size="lg"
-                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-4 font-semibold hover:shadow-lg transition-all duration-300"
+                className="flex-1 px-6 py-4 font-semibold hover:shadow-lg transition-all duration-300"
+                style={{ backgroundColor: '#00CE7C', color: '#FFFFFF' }}
               >
                 <RotateCcw className="mr-2 h-5 w-5" />
                 Retake Quiz
@@ -117,7 +119,8 @@ export function ResultsScreen({ results, onShareResults, onRetakeQuiz }: Results
                 onClick={onShareResults}
                 variant="outline"
                 size="lg"
-                className="flex-1 border-2 border-primary text-primary hover:bg-green-50 dark:hover:bg-green-900/20 px-6 py-4 font-semibold transition-all duration-300"
+                className="flex-1 px-6 py-4 font-semibold transition-all duration-300"
+                style={{ border: '2px solid #00CE7C', color: '#212121', backgroundColor: '#F2F2F2' }}
               >
                 <Share2 className="mr-2 h-5 w-5" />
                 Share Results
