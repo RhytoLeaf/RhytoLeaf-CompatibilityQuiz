@@ -81,6 +81,11 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  /* Progress bar styling */
+  .progress-bar [data-state="complete"] {
+    background-color: #00CE7C !important;
+  }
 }
 
 /* Custom animations */

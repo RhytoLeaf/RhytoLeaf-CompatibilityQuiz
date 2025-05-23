@@ -42,7 +42,10 @@ export function QuizScreen({
                 {currentQuestionIndex + 1} of {totalQuestions}
               </span>
             </div>
-            <Progress value={progress} className="h-3" />
+            <Progress 
+              value={progress} 
+              className="h-3 progress-bar" 
+            />
           </CardContent>
         </Card>
 
@@ -105,7 +108,20 @@ export function QuizScreen({
                 onClick={onPreviousQuestion}
                 disabled={currentQuestionIndex === 0}
                 variant="outline"
-                className="px-6 py-3"
+                className="px-6 py-3 border-2 hover:text-white transition-colors"
+                style={{ 
+                  borderColor: '#00CE7C', 
+                  color: '#212121',
+                  backgroundColor: 'transparent'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#00CE7C';
+                  e.currentTarget.style.color = '#FFFFFF';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = '#212121';
+                }}
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Previous
