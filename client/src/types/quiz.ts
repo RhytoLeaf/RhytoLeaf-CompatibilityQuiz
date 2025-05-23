@@ -13,19 +13,17 @@ export interface QuizAnswer {
   isCorrect: boolean;
 }
 
-export interface CategoryScore {
+export interface TraitProfile {
   category: string;
-  correct: number;
-  total: number;
-  percentage: number;
+  trait: string;
+  description: string;
+  strength: 'High' | 'Moderate' | 'Low';
 }
 
 export interface QuizResults {
-  totalScore: number;
-  percentage: number;
-  categoryScores: CategoryScore[];
+  traitProfiles: TraitProfile[];
+  compatibilityInsights: string[];
   answers: QuizAnswer[];
-  insights: string[];
 }
 
 export type QuizScreen = 'welcome' | 'quiz' | 'results';

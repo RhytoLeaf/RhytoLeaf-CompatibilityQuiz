@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from 'react';
-import { QuizQuestion, QuizAnswer, QuizResults, CategoryScore, QuizScreen } from '../types/quiz';
+import { QuizQuestion, QuizAnswer, QuizResults, TraitProfile, QuizScreen } from '../types/quiz';
 import { quizQuestions, categories } from '../data/questions';
 
 export const useQuiz = () => {
@@ -55,69 +55,115 @@ export const useQuiz = () => {
   }, [currentQuestionIndex]);
 
   const calculateResults = useCallback((): QuizResults => {
-    const correctAnswers = answers.filter(answer => answer.isCorrect).length;
-    const totalScore = correctAnswers;
-    const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+    // Analyze trait profiles based on answers
+    const traitProfiles: TraitProfile[] = [];
 
-    // Calculate category scores
-    const categoryScores: CategoryScore[] = categories.map(category => {
-      const categoryQuestions = quizQuestions.filter(q => q.category === category);
-      const categoryAnswers = answers.filter(answer => 
-        categoryQuestions.some(q => q.id === answer.questionId)
-      );
-      const correct = categoryAnswers.filter(answer => answer.isCorrect).length;
-      const total = categoryQuestions.length;
-      
-      return {
-        category,
-        correct,
-        total,
-        percentage: total > 0 ? Math.round((correct / total) * 100) : 0
-      };
-    });
-
-    // Generate insights based on performance and question explanations
-    const insights: string[] = [];
-    
-    if (percentage >= 80) {
-      insights.push("You demonstrate excellent awareness of relationship compatibility factors and the subtle signs that can impact long-term success.");
-    } else if (percentage >= 60) {
-      insights.push("You have a good understanding of relationship dynamics with room to deepen your awareness of compatibility factors.");
-    } else {
-      insights.push("This quiz has introduced you to important compatibility concepts that can help you build stronger relationships.");
-    }
-
-    // Add category-specific insights
-    const strongCategories = categoryScores.filter(cat => cat.percentage >= 80);
-    const weakCategories = categoryScores.filter(cat => cat.percentage < 60);
-
-    if (strongCategories.length > 0) {
-      insights.push(`You show particularly strong awareness in: ${strongCategories.map(cat => cat.category).join(', ')}.`);
-    }
-
-    if (weakCategories.length > 0) {
-      insights.push(`Consider exploring these areas further: ${weakCategories.map(cat => cat.category).join(', ')}.`);
-    }
-
-    // Add detailed explanations from each question
-    const questionInsights = answers.map(answer => {
+    // Emotional Regulation
+    const emotionalRegAnswers = answers.filter(answer => {
       const question = quizQuestions.find(q => q.id === answer.questionId);
-      if (question) {
-        return `${question.category}: ${question.explanation}`;
-      }
-      return '';
-    }).filter(insight => insight !== '');
+      return question?.category === "Emotional Regulation";
+    });
+    
+    const seekConnection = emotionalRegAnswers.filter(a => a.selectedOption === 0).length;
+    const preferIsolation = emotionalRegAnswers.filter(a => a.selectedOption === 1 || a.selectedOption === 2).length;
+    
+    if (seekConnection > preferIsolation) {
+      traitProfiles.push({
+        category: "Emotional Regulation",
+        trait: "Connection-Seeking",
+        description: "You naturally seek connection and support when stressed. You process emotions best through sharing and interaction.",
+        strength: seekConnection >= 2 ? "High" : "Moderate"
+      });
+    } else {
+      traitProfiles.push({
+        category: "Emotional Regulation", 
+        trait: "Processing-Through-Solitude",
+        description: "You prefer to process emotions independently before sharing. You need space to work through stress internally.",
+        strength: preferIsolation >= 2 ? "High" : "Moderate"
+      });
+    }
 
-    insights.push(...questionInsights);
+    // Personal Growth
+    const growthAnswers = answers.filter(answer => {
+      const question = quizQuestions.find(q => q.id === answer.questionId);
+      return question?.category === "Personal Growth";
+    });
+    
+    const growthOriented = growthAnswers.filter(a => a.selectedOption === 0).length;
+    const stabilityOriented = growthAnswers.filter(a => a.selectedOption === 2 || a.selectedOption === 3).length;
+    
+    if (growthOriented > stabilityOriented) {
+      traitProfiles.push({
+        category: "Personal Growth",
+        trait: "Evolution-Focused",
+        description: "You see life as constant evolution and actively seek change, new experiences, and personal development.",
+        strength: growthOriented >= 2 ? "High" : "Moderate"
+      });
+    } else {
+      traitProfiles.push({
+        category: "Personal Growth",
+        trait: "Stability-Focused", 
+        description: "You value predictability and prefer building upon established foundations rather than constant change.",
+        strength: stabilityOriented >= 2 ? "High" : "Moderate"
+      });
+    }
+
+    // Risk Tolerance
+    const riskAnswers = answers.filter(answer => {
+      const question = quizQuestions.find(q => q.id === answer.questionId);
+      return question?.category === "Risk Tolerance";
+    });
+    
+    const highRisk = riskAnswers.filter(a => a.selectedOption === 0).length;
+    const lowRisk = riskAnswers.filter(a => a.selectedOption === 2 || a.selectedOption === 3).length;
+    
+    if (highRisk > lowRisk) {
+      traitProfiles.push({
+        category: "Risk Tolerance",
+        trait: "Uncertainty-Embracing",
+        description: "You thrive in uncertain situations and see unpredictability as opportunity for growth.",
+        strength: highRisk >= 2 ? "High" : "Moderate"
+      });
+    } else {
+      traitProfiles.push({
+        category: "Risk Tolerance",
+        trait: "Security-Seeking",
+        description: "You prefer security and predictable outcomes, carefully weighing risks before making decisions.",
+        strength: lowRisk >= 2 ? "High" : "Moderate"
+      });
+    }
+
+    // Generate compatibility insights
+    const compatibilityInsights: string[] = [
+      "The uncomfortable truth: These patterns cause more relationship breakdowns than infidelity or dramatic conflicts, precisely because they're minimized until they become unmanageable.",
+      
+      "The paradox few understand: The intensity of initial attraction is often inversely proportional to long-term compatibility. The most powerful chemistry arises from the very polarities that become major sources of conflict.",
+      
+      "Why authentic love isn't enough: When fundamental needs and deep values create constant friction, no amount of compromise can truly resolve structural incompatibilities.",
+      
+      "This awareness isn't meant to sabotage promising relationships, but to distinguish between normal differences that create dynamic tension and those structural incompatibilities that no amount of love can overcome."
+    ];
+
+    // Add specific insights based on trait combinations
+    const hasEvolutionFocus = traitProfiles.some(p => p.trait === "Evolution-Focused");
+    const hasStabilityFocus = traitProfiles.some(p => p.trait === "Stability-Focused");
+    const hasConnectionSeeking = traitProfiles.some(p => p.trait === "Connection-Seeking");
+    const hasProcessingSolitude = traitProfiles.some(p => p.trait === "Processing-Through-Solitude");
+
+    if (hasEvolutionFocus && hasStabilityFocus) {
+      compatibilityInsights.push("Your profile shows both growth and stability tendencies - this suggests you seek evolution within secure foundations, which can be a balanced approach to relationships.");
+    }
+
+    if (hasConnectionSeeking && hasProcessingSolitude) {
+      compatibilityInsights.push("You show both connection-seeking and solitary processing patterns - this suggests you may need both connection and space at different times, requiring clear communication with partners.");
+    }
 
     return {
-      totalScore,
-      percentage,
-      categoryScores,
-      answers,
-      insights
+      traitProfiles,
+      compatibilityInsights,
+      answers
     };
-  }, [answers, totalQuestions]);
+  }, [answers]);
 
   const results = useMemo(() => {
     if (currentScreen === 'results') {
@@ -129,7 +175,8 @@ export const useQuiz = () => {
   const shareResults = useCallback(async () => {
     if (!results) return;
 
-    const shareText = `I just completed the Relationship Compatibility Quiz and scored ${results.percentage}%! Test your understanding of the 7 silent signs of incompatibility.`;
+    const dominantTraits = results.traitProfiles.map(p => p.trait).join(', ');
+    const shareText = `I just discovered my relationship compatibility traits: ${dominantTraits}. Take the quiz to explore the 7 silent signs of incompatibility!`;
     const shareUrl = window.location.href;
 
     if (navigator.share) {
