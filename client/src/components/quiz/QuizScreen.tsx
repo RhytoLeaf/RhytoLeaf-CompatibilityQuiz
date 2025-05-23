@@ -85,11 +85,18 @@ export function QuizScreen({
                   } cursor-pointer`}
                 >
                   <div className="flex items-center">
-                    <div className={`w-6 h-6 border-2 rounded-full mr-4 transition-colors flex items-center justify-center ${
+                    <div className={`w-6 h-6 border-2 rounded-full mr-4 transition-colors flex items-center justify-center flex-shrink-0 ${
                       selectedOption === index
                         ? 'border-primary bg-primary'
                         : 'border-muted-foreground group-hover:border-primary'
-                    }`}>
+                    }`}
+                    style={{ 
+                      minWidth: '24px',
+                      minHeight: '24px',
+                      maxWidth: '24px',
+                      maxHeight: '24px',
+                      borderRadius: '50%'
+                    }}>
                       {selectedOption === index && (
                         <div className="w-3 h-3 bg-white rounded-full" />
                       )}
